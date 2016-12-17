@@ -1,0 +1,7 @@
+{
+  "name": "such rtk much dpi",
+  "permissions": [
+    "webRequest",
+    "http://*/*"
+  ]
+}
