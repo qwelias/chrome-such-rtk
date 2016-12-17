@@ -1,10 +1,13 @@
+const host = /^http:\/\/(.+?)\//
+
 chrome.webRequest.onBeforeSendHeaders.addListener( ( event ) => {
-    const header = event.requestHeaders.find( h => header.name === 'Host' )
-    if ( !header ) return
-    
-    header.value = ' ' + header.value
+    event.requestHeaders.push( {
+      name: 'HoSt',
+      value: ' ' + event.url.match( host )[ 1 ]
+    } )
+
     return { requestHeaders: event.requestHeaders }
   },
-  { urls: [ 'http://**/*' ] },
-  [ 'blocking', 'requestHeaders' ],
+  { urls: [ 'http://*/*' ] },
+  [ 'blocking', 'requestHeaders' ]
 )
