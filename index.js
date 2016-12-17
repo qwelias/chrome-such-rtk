@@ -1,11 +1,10 @@
-chrome.webRequest.onBeforeSendHeaders.addListener((event) => {
-    for (let header of event.requestHeaders) {
-      if (header.name === 'Host') {
-        header.value = ' ' + header.value
-      }
-    }
-    return { requestHeaders: event.requestHeaders };
+chrome.webRequest.onBeforeSendHeaders.addListener( ( event ) => {
+    const header = event.requestHeaders.find( h => header.name === 'Host' )
+    if ( !header ) return
+    
+    header.value = ' ' + header.value
+    return { requestHeaders: event.requestHeaders }
   },
-  {urls: ['http://**/*']},
-  [ 'blocking', 'requestHeaders']
-);
+  { urls: [ 'http://**/*' ] },
+  [ 'blocking', 'requestHeaders' ],
+)
